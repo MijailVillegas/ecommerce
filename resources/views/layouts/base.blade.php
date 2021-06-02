@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Sixteen Clothing HTML Template</title>
+    <title>Desarrollo de sitemas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,16 +39,14 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>Sixteen <em>Clothing</em></h2></a>
+          <a class="navbar-brand" href="index.html"><h2>Desarrollo <em>De Sistemas</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">Home
-                  <span class="sr-only">(current)</span>
-                </a>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
               </li> 
               <li class="nav-item">
                 <a class="nav-link" href="/shop">Tienda</a>
@@ -62,6 +60,46 @@
               <li class="nav-item">
                 <a class="nav-link" href="/aboutus">Acerca De</a>
               </li>
+
+              @if(Route::has('login'))
+                @auth
+                @if(Auth::user()->utype === 'ADM')
+                <div class="content">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Mi cuenta ({{Auth::user()->name}})</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                    </li>
+                    <form id="logout-form" method="POST" action="{{route('logout')}}">
+                      @csrf
+                    </form>
+                </div>
+                @else
+                <div class="content">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Mi cuenta ({{Auth::user()->name}})</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                  </li>
+                    <form id="logout-form" method="POST" action="{{route('logout')}}">
+                      @csrf
+                    </form>
+                </div>
+                @endif
+                @else
+                <li>
+                  <a class="nav-link" href="{{route('login')}}">Log in</a>
+                </li>
+                <li>
+                  <a class="nav-link" href="{{route('register')}}">Registrar</a>
+                </li>
+                @endauth               
+              @endif
             </ul>
           </div>
         </div>
@@ -72,20 +110,20 @@
         <div class="owl-banner owl-carousel">
           <div class="banner-item-01">
             <div class="text-content">
-              <h4>Best Offer</h4>
-              <h2>New Arrivals On Sale</h2>
+              <h4>LAS MEJORES OFERTAS</h4>
+              <h2>Nuevos Productos a La venta</h2>
             </div>
           </div>
           <div class="banner-item-02">
             <div class="text-content">
-              <h4>Flash Deals</h4>
-              <h2>Get your best products</h2>
+              <h4>Los mejores tratos</h4>
+              <h2>Obten los mejores productos</h2>
             </div>
           </div>
           <div class="banner-item-03">
             <div class="text-content">
-              <h4>Last Minute</h4>
-              <h2>Grab last minute deals</h2>
+              <h4>Hasta lo último</h4>
+              <h2>Consigue ofertas de última hora</h2>
             </div>
           </div>
         </div>

@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Articulo;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AboutUsComponent extends Component
 {
+    use WithPagination;
     public function render()
     {
-        return view('livewire.about-us-component')->layout("layouts.base");
+        $articulos = Articulo::paginate(12);
+        return view('livewire.about-us-component',['articulos'=>$articulos])->layout("layouts.base");
     }
 }
